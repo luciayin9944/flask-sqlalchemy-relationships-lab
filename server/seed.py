@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from app import app
-from models import db, Event, Session, Speaker, Bio
+from models import db, Event, Session, Speaker, Bio, SessionSpeaker
 import datetime
 
 with app.app_context():
@@ -46,5 +46,14 @@ with app.app_context():
     session2.speakers.append(speaker3)
     session3.speakers.append(speaker2)
     db.session.commit()
+
+    # # Associate Speakers and Sessions manually via SessionSpeaker
+    # db.session.add_all([
+    #     SessionSpeaker(session=session1, speaker=speaker1),
+    #     SessionSpeaker(session=session2, speaker=speaker2),
+    #     SessionSpeaker(session=session2, speaker=speaker3),
+    #     SessionSpeaker(session=session3, speaker=speaker2)
+    # ])
+    # db.session.commit()
 
     print("🌱 Database seeded successfully!")
